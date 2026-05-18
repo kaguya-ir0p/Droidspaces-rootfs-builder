@@ -70,6 +70,8 @@ jobs:
           - name: NixOS-Minimal-Systemd-default
             attr: legacyPackages.aarch64-linux.nixosDroidspacesTarballs.aarch64-linux.minimal
           - name: NixOS-Minimal-Systemd-v259
+            attr: legacyPackages.aarch64-linux.nixosDroidspacesTarballs.aarch64-linux.minimal-with-systemd-v257-9
+          - name: NixOS-Minimal-Systemd-v259
             attr: legacyPackages.aarch64-linux.nixosDroidspacesTarballs.aarch64-linux.minimal-with-systemd-v259
           - name: NixOS-Finix-Experimental
             attr: legacyPackages.aarch64-linux.finixDroidspacesTarballs.aarch64-linux.experimental
