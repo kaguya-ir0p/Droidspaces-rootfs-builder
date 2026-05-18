@@ -81,7 +81,7 @@ jobs:
 
       - name: Build ${{ matrix.name }} RootFS
         run: |
-          nix build github:ravindu644/Droidspaces-OSS#${{ matrix.attr }}
+          nix build github:kaguya-ir0p/Droidspaces-OSS#${{ matrix.attr }}
 
       - name: Package artifact
         run: |
