@@ -35,31 +35,7 @@ jobs:
           echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_OUTPUT
           echo "BUILD_ID=$BUILD_ID" >> $GITHUB_OUTPUT
           echo "Build ID: $BUILD_ID"
-
-  build:
-    needs: setup
-    runs-on: ubuntu-24.04-arm
-    strategy:
-      fail-fast: false
-      matrix:
-        template: ${{ fromJson(needs.setup.outputs.templates) }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Build RootFS (${{ matrix.template }})
-        run: |
-          chmod +x build_rootfs-native.sh
-          # Native build without QEMU overhead
-          ./build_rootfs-native.sh -i "${{ matrix.template }}.Dockerfile" -v "${{ needs.setup.outputs.build_id }}"
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.template }}-rootfs
-          path: "*.tar.xz"
-          retention-days: 1
-
+          
   build-nixos:
     needs: setup
     runs-on: ubuntu-24.04-arm
@@ -98,7 +74,7 @@ jobs:
           retention-days: 1
 
   release:
-    needs: [setup, build, build-nixos]
+    needs: [setup, build-nixos]
     runs-on: ubuntu-latest
     permissions:
       contents: write
